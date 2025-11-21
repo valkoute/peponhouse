@@ -7,7 +7,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="ppnhscss.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="pepon.ico">
-
+    <!-- Snake game styles (moved from fixed overlay to an in-flow segment) -->
+    <style>
+    /* Snake wrapper as centered section in page flow */
+    #snakeWrapper {
+        position: relative; /* no longer fixed */
+        margin: 32px auto;
+        width: 100%;
+        max-width: 720px;
+        z-index: 10;
+        background: rgba(0,0,0,0.30);
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        backdrop-filter: blur(4px);
+    }
+    /* Responsive canvas: keep intrinsic pixel size via attributes, scale to container */
+    #snakeCanvas {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 6px;
+        background: transparent;
+    }
+    #snakeControls {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        justify-content: center;
+    }
+    .snake-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        background: #111;
+        color: #fff;
+        opacity: 0.95;
+    }
+    .snake-btn:active { transform: translateY(1px); }
+    .snake-hint {
+        position: relative;
+        display: block;
+        margin-bottom: 8px;
+        font-size: 13px;
+        color: #eee;
+        opacity: 0.95;
+    }
+    </style>
 </head>
 <body>
     <!-- Animated Grid Background -->
@@ -54,6 +102,18 @@
             </div>
         </div>
     </nav>
+    
+    <!-- Snake game segment placed in the normal document flow -->
+    <section id="snakeWrapper" aria-label="Snake game">
+        <div class="snake-hint">Snake — Arrow keys / WASD</div>
+        <!-- Use intrinsic pixel size for game logic (cols=16, rows=14 => choose 40px cells => 640x560) -->
+        <canvas id="snakeCanvas" width="640" height="560"></canvas>
+        <div id="snakeControls">
+            <button id="snakeStart" class="snake-btn">Start</button>
+            <button id="snakePause" class="snake-btn">Pause</button>
+            <button id="snakeReset" class="snake-btn">Reset</button>
+        </div>
+    </section>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -191,11 +251,7 @@
                     </div>
                 </div>
                 <div class="map-container">
-                    <div class="map-placeholder">
-                        <p>Interactive Map</p>
-                        <p style="font-size: 0.9rem; margin-top: 10px;">Sevasteias</p>
-                    </div>
-                    <div class="map-overlay"></div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31771.20247448661!2d23.52482327683259!3d40.62348697934167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a839e6f5f7b6b7%3A0x8e8e4b8e4b8e4b8e!2sSevasteias%2C%20Greece!5e0!3m2!1sen!2sus!4v1616161616161" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -232,6 +288,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 </body>
 
 </html>
+
 
 
 

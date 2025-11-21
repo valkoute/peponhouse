@@ -18,6 +18,7 @@
             position: relative;
             font-weight: 400;
         }
+            <p style="background-image: url('pepon.ico');">
 
         /* Animated background with hexagon pattern */
         .grid-bg {
@@ -1125,3 +1126,4 @@
             }
 
         }
+
